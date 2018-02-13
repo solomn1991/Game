@@ -1,14 +1,22 @@
 # coding:utf-8
 # author:赵越超
 
+# coding:utf-8
+# author:赵越超
+import sys
+
+import os
+work_dir = os.getcwd()
+sys.path.append(work_dir)
 import config
+
 from autobahn.asyncio.wamp import ApplicationSession, ApplicationRunner
 from autobahn.wamp.types import RegisterOptions
 
 from room import BaseRoom
 
 
-class ServerComponent(ApplicationSession):
+class GameComponent(ApplicationSession):
 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
@@ -78,9 +86,15 @@ class ServerComponent(ApplicationSession):
 
 
 
-
-
 if __name__=="__main__":
 
-    runner = ApplicationRunner(config.CROSSBAR_NODE.get("ws_for_server"),"game")
-    runner.run(ServerComponent)
+    if len(sys.argv)==1:
+
+        crossbar_url = "ws://127.0.0.1:8080/ws_for_server"
+        realm = "game"
+    else:
+        crossbar_url = sys.argv[1]
+        realm = sys.argv[2]
+
+    runner = ApplicationRunner(crossbar_url,realm)
+    runner.run(GameComponent)

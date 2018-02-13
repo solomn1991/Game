@@ -89,7 +89,31 @@
                     }
                 }
             ]
-        }
+        },
+        {
+            "type":"guest",
+            "executable":"python3",
+            "arguments":[
+                "components/python/auth.py",
+                "ws://127.0.0.1:8080/ws_for_server",
+                "game"
+            ],
+            "options":{
+                "workdir":".."
+            }
+        },
+        {
+            "type":"guest",
+            "executable":"python3",
+            "arguments":[
+                "components/python/game.py",
+                "ws://127.0.0.1:8080/ws_for_server",
+                "game"
+            ],
+            "options":{
+                "workdir":".."
 
+            }
+        }
     ]
 }

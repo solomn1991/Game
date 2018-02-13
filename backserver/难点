@@ -19,16 +19,19 @@
         session 基于数据库实现一套分布式的session管理系统，方案待定 x
 
 
-        基于crossbar的session做一套认证管理
-        比较复杂
+        基于crossbar的session做一套认证管理 x
+        比较复杂,利用crossbar现有的即可，就是文档吧比较烦
         1.基于anomynous的session去拿,就算认证成功了，会出现被调用方里面什么都拿不到的情况，不知道这是啥原因，待排查 1
         2.能否将读到的数据，比如用户id，在打请求的时候通过session直接带过来 no
         3.session中的内容是暂存在crossbar中，每次打发过来，还是说只有连上的时候回打过来 1
-        4.断开后，session会不会消失
+        4.断开后，session会不会消失? 会1
         5.带上名字那种方式怎么弄
-        6.guest worker在启动时，如何保证启动顺序
+        6.guest worker在启动时，如何保证启动顺序 1
         7.服务端该采取哪种认证方式，哪种更合适，怎么弄 1
         8.基于anomynous能拿到session_id，如何根据session去拿session中的其他信息，比如extra 1
+
+
+
 
 
 
