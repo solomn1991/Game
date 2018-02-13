@@ -6,10 +6,10 @@
             "type": "router",
             "realms": [
                 {
-                    "name": "realm1",
+                    "name": "game",
                     "roles": [
                         {
-                            "name": "anonymous",
+                            "name": "server",
                             "permissions": [
                                 {
                                     "uri": "",
@@ -20,10 +20,28 @@
                                         "publish": true,
                                         "subscribe": true
                                     },
-                                    "disclose": {
-                                        "caller": false,
-                                        "publisher": false
+
+                                    "cache": true
+                                }
+                            ]
+                        },
+                        {
+                            "name": "client",
+                            "permissions": [
+                                {
+                                    "uri": "",
+                                    "match": "prefix",
+                                    "allow": {
+                                        "call": true,
+                                        "register": false,
+                                        "publish": false,
+                                        "subscribe": true
                                     },
+                                    "disclose":{
+                                        "caller": true,
+                                        "publisher": true
+                                    },
+
                                     "cache": true
                                 }
                             ]
@@ -41,8 +59,24 @@
                     "rawsocket": {
                     },
                     "websocket": {
-                        "ws": {
-                            "type": "websocket"
+                        "ws_for_client": {
+                            "type": "websocket",
+                            "auth":{
+                                "wampcra":{
+                                    "type":"dynamic",
+                                    "authenticator": "auth"
+                                }
+                            }
+
+                        },
+                        "ws_for_server":{
+                            "type":"websocket",
+                            "auth":{
+                                "anonymous":{
+                                    "type":"static",
+                                    "role":"server"
+                                }
+                            }
                         }
                     },
                     "web": {
@@ -56,5 +90,6 @@
                 }
             ]
         }
+
     ]
 }

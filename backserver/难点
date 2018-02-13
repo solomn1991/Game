@@ -6,3 +6,33 @@
 
 
 2018-02-07
+    1.通讯的基本打通
+        1.Pattern-Based Registrations route 如何如何取出pattern 部分的内容1
+        2.调用到房间内的内容打通1
+
+    2.用户会话保持和认证
+        1.方案
+        2.实现
+
+        1.如何进行用户认证
+
+        session 基于数据库实现一套分布式的session管理系统，方案待定 x
+
+
+        基于crossbar的session做一套认证管理
+        比较复杂
+        1.基于anomynous的session去拿,就算认证成功了，会出现被调用方里面什么都拿不到的情况，不知道这是啥原因，待排查 1
+        2.能否将读到的数据，比如用户id，在打请求的时候通过session直接带过来 no
+        3.session中的内容是暂存在crossbar中，每次打发过来，还是说只有连上的时候回打过来 1
+        4.断开后，session会不会消失
+        5.带上名字那种方式怎么弄
+        6.guest worker在启动时，如何保证启动顺序
+        7.服务端该采取哪种认证方式，哪种更合适，怎么弄 1
+        8.基于anomynous能拿到session_id，如何根据session去拿session中的其他信息，比如extra 1
+
+
+
+
+
+
+
