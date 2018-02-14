@@ -6,9 +6,13 @@ import os
 work_dir = os.getcwd()
 sys.path.append(work_dir)
 import config
+import database
+from database.models import User
 
 from autobahn.asyncio.wamp import ApplicationSession, ApplicationRunner
 from autobahn.wamp.types import RegisterOptions
+
+
 
 
 
@@ -23,19 +27,25 @@ class AuthComponent(ApplicationSession):
         self.register(self.auth,rpc_route)
 
 
-    def auth(self,realm, authid, details):
-        print("认证",authid,"中")
-        result = {
-            'realm':"game",
-            'role':"client",
-            'secret':'123',
-            'extra':{
-                "user_id": 1,
-                "username": "abc"
-            }
+    async def auth(self,realm, authid, details):
+        account = authid
+        result = {}
 
-        }
+        user = await database.db_objects.get(User,account=account)
+        if user:
+            print("认证",authid,"中")
+            result = {
+                'realm':"game",
+                'role':"client",
+                'secret':user.password,
+                'extra':{
+                    "user_id": user.id,
+                    "username": user.username
+                }
+
+            }
         return result
+
 
 
 if __name__=="__main__":

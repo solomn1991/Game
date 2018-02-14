@@ -3,6 +3,8 @@
 
 SQLITE_PATH = "test.db"
 
+PG_DB_NAME = "solomn"
+
 SERVER_IP = "127.0.0.1"
 
 CROSSBAR_NODE = {

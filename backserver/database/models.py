@@ -3,8 +3,6 @@
 
 from peewee import *
 
-
-
 from database import db
 
 
@@ -12,7 +10,7 @@ class User(Model):
     account = CharField()
     password = CharField()
     username = CharField()
-    test = CharField()
+    test = CharField(null=True)
 
     class Meta:
         database = db

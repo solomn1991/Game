@@ -1,8 +1,12 @@
 # coding:utf-8
 # author:赵越超
-from peewee import SqliteDatabase
+import asyncio
+from peewee_async import Manager,PostgresqlDatabase
+
 
 import config
 
 
-db = SqliteDatabase(config.SQLITE_PATH)
+loop = asyncio.get_event_loop()
+db = PostgresqlDatabase(config.PG_DB_NAME)
+db_objects = Manager(db,loop=loop)

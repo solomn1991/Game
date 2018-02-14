@@ -10,7 +10,7 @@ import pprint
 
 
 USER="solomn"
-USER_SECRET = "123"
+USER_SECRET = "123456"
 
 
 class MyComponent(ApplicationSession):
