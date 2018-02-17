@@ -1,7 +1,7 @@
 # coding:utf-8
 # author:赵越超
 
-from peewee import *
+from peewee import CharField,Model
 
 from database import db
 

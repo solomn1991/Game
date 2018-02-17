@@ -4,6 +4,7 @@
 # coding:utf-8
 # author:赵越超
 import sys
+import asyncio
 
 import os
 work_dir = os.getcwd()
@@ -12,6 +13,7 @@ import config
 
 from autobahn.asyncio.wamp import ApplicationSession, ApplicationRunner
 from autobahn.wamp.types import RegisterOptions
+from autobahn.wamp.types import PublishOptions
 
 from room import BaseRoom
 
@@ -25,7 +27,7 @@ class GameComponent(ApplicationSession):
         self.player_id2room_id = {}
 
 
-    def onJoin(self, details):
+    async def onJoin(self, details):
         print("游戏服务器",config.SERVER_IP,"加入Crossbar")
 
         rpc_route = config.SERVER_IP+"."+"create_room"
@@ -35,6 +37,14 @@ class GameComponent(ApplicationSession):
         rpc_route = config.SERVER_IP + "." + "room_operate.."
         self.register(self.room_operate, rpc_route,RegisterOptions(match="wildcard",details_arg='details'),)
         print("注册", rpc_route, "完成")
+
+        counter = 0
+        while True:
+            publication = await self.publish(u'test',counter,options=PublishOptions(acknowledge=True,eligible_authid=[u"solomn"])) #acknowledge 不加会报错
+            print("publish something",counter)
+            await asyncio.sleep(3)
+            counter = counter+1
+
 
 
     def get_available_room_id(self):

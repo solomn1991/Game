@@ -38,6 +38,13 @@ class MyComponent(ApplicationSession):
         res = await self.call('127.0.0.1.room_operate.0.test',operation_data={"args":(),"kwargs":{}})
         print("Got result: {}".format(res))
 
+        def on_test(x):
+            print(x)
+            print("----")
+
+        await self.subscribe(on_test,"test")
+
+
 
 
 
