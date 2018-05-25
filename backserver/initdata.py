@@ -2,7 +2,6 @@
 # author:赵越超
 
 
-from database import db
 from database.models import *
 
 

@@ -1,0 +1,37 @@
+由于crossbar随着部署环境的不同，部署往往很容易发生问题，难以排查，因此采用docker的部署方法
+
+1.安装docker，安装查询相关文档
+    我的docker账户，solomn superdeveloper
+2.部署细节
+    思路:
+        docker中拉下文件
+        修改配置文件
+        直接在docker中跑，爱放哪儿放哪儿
+
+        问题
+            是否要形成自己的镜像
+            本地在跑的时候一直修改docker的配置文件不方便，本地怎么跑还是得部署起来
+
+        急需解决的问题
+            本地crossbar跑不起来(fixed)
+                Crossbar no longer supports python2, please use Python3.
+
+            又遇到别的问题（to be answerd）
+                builtins.AttributeError: 'Process' object has no attribute 'cpu_affinity'
+
+            docker中镜像使用的基本规则的复习
+            如果方案1不行，只能只用docker 方案
+
+
+详细的https://crossbar.io/docs/Installation-on-Docker/
+
+sudo docker pull crossbario/crossbar
+sudo docker run --rm -it -p 8080:8080 --name crossbar crossbario/crossbar
+
+从外部读取配置文件的方法
+sudo docker run -v /Users/solomn/PycharmProjects/Game/backserver://node --rm -it -p 8080:8080 --name crossbar crossbario/crossbar
+
+
+
+
+

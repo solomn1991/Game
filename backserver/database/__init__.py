@@ -8,5 +8,5 @@ import config
 
 
 loop = asyncio.get_event_loop()
-db = PostgresqlDatabase(config.PG_DB_NAME)
+db = PostgresqlDatabase(config.PG_DB_NAME,user=config.PG_DB_USER,password=config.PG_DB_PASSWORD)
 db_objects = Manager(db,loop=loop)
