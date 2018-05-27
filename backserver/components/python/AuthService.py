@@ -16,7 +16,7 @@ from autobahn.wamp.types import RegisterOptions
 
 
 
-class AuthComponent(ApplicationSession):
+class AuthManager(ApplicationSession):#comp
     def __init__(self,*args,**kwargs):
         super().__init__(*args, **kwargs)
 
@@ -25,6 +25,7 @@ class AuthComponent(ApplicationSession):
     def onJoin(self, details):
         rpc_route = "auth"
         self.register(self.auth,rpc_route)
+        print("Auth server finish start")
 
 
     async def auth(self,realm, authid, details):
@@ -44,6 +45,7 @@ class AuthComponent(ApplicationSession):
                 }
 
             }
+        print("Auth result",result)
         return result
 
 
@@ -60,7 +62,7 @@ if __name__=="__main__":
         realm = sys.argv[2]
 
     runner = ApplicationRunner(crossbar_url, realm)
-    runner.run(AuthComponent)
+    runner.run(AuthManager)
 
 
 

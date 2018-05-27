@@ -34,15 +34,14 @@ class MyComponent(ApplicationSession):
 
         # call a remote procedure.
 
-        res = await self.call('127.0.0.1.create_room', "chat")
         res = await self.call('127.0.0.1.room_operate.0.test',operation_data={"args":(),"kwargs":{}})
+        # res = await self.call('127.0.0.1.room_operate.create_room.new',operation_data={"args":(),"kwargs":{"room_type":"1"}})
         print("Got result: {}".format(res))
 
         def on_test(x):
             print(x)
             print("----")
 
-        await self.subscribe(on_test,"test")
 
 
 
