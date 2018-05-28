@@ -29,7 +29,7 @@ sudo docker pull crossbario/crossbar
 sudo docker run --rm -it -p 8080:8080 --name crossbar crossbario/crossbar
 
 从外部读取配置文件的方法
-solomn$ docker run -v ${PWD}/backserver:/node --rm -it -p 8080:8080 --name crossbar crossbario/crossbar
+docker run -v ${PWD}/backserver:/node --rm -it -p 8080:8080 --name crossbar crossbario/crossbar
 
 
 

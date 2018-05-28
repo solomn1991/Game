@@ -5,4 +5,7 @@
 class BaseRoom(object):
 
     def test(self):
-        return{"abc":"ddd"}
+        return{"hello":"world"}
+
+
+

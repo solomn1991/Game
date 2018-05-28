@@ -29,6 +29,7 @@ class RoomManager(ApplicationSession):#comp
         rpc_route = config.SERVER_IP + "." + "room_operate.."
         self.register(self.room_operate, rpc_route,RegisterOptions(match="wildcard",details_arg='details'),)
         print("注册", rpc_route, "完成")
+        print("Room server started")
 
 
     def get_available_room_id(self):
@@ -40,8 +41,7 @@ class RoomManager(ApplicationSession):#comp
         return room_id
 
 
-    def create_room(self,room_type,user_info):
-        print(user_info,"创建房间类型",room_type)
+    def create_room(self,room_type):
         room_id = self.get_available_room_id()
         room = BaseRoom()
         self.rooms[room_id] = room
@@ -64,7 +64,7 @@ class RoomManager(ApplicationSession):#comp
         url_prefix = config.SERVER_IP + ".room_operate."
         inner_operation = pattern_url.replace(url_prefix, "")
 
-        operation_data = kwargs.get("operation_data")
+        operation_data = kwargs.get("operation_data",{})
         op_args = operation_data.get("args", ())
         op_kwargs = operation_data.get("kwargs", {})
 
@@ -86,6 +86,7 @@ class RoomManager(ApplicationSession):#comp
 
                     result = handler(*op_args, **op_kwargs)
         except Exception as e:
+            print(traceback.format_exc())
             result = {"success":False,"reason":"未知异常","trace_info":traceback.format_exc()}
 
 

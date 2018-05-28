@@ -25,7 +25,7 @@ class AuthManager(ApplicationSession):#comp
     def onJoin(self, details):
         rpc_route = "auth"
         self.register(self.auth,rpc_route)
-        print("Auth server finish start")
+        print("Auth server started")
 
 
     async def auth(self,realm, authid, details):
@@ -34,7 +34,7 @@ class AuthManager(ApplicationSession):#comp
 
         user = await database.db_objects.get(User,account=account)
         if user:
-            print("认证",authid,"中")
+            print("认证",authid,"中...")
             result = {
                 'realm':"game",
                 'role':"client",

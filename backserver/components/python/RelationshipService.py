@@ -19,7 +19,7 @@ from autobahn.wamp.types import PublishOptions
 
 
 
-class GameManager(ApplicationSession):#comp
+class RelationshipManager(ApplicationSession):#comp
 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
@@ -28,9 +28,9 @@ class GameManager(ApplicationSession):#comp
         self.player_id2room_id = {}
 
     def onJoin(self, details):
-        rpc_route = "get_availabe_room_id"
-        self.register(self.auth, rpc_route)
-        print("Game server finish start")
+        # rpc_route = "get_availabe_room_id"
+        # self.register(self.auth, rpc_route)
+        print("Relationship server started")
 
 
 
@@ -53,4 +53,4 @@ if __name__=="__main__":
         realm = sys.argv[2]
 
     runner = ApplicationRunner(crossbar_url,realm)
-    runner.run(GameManager)
+    runner.run(RelationshipManager)
