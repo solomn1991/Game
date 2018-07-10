@@ -23,13 +23,21 @@ var connection = new autobahn.Connection({
     onchallenge:onchallenge
 });
 
-connection.onopen =function(session){
-    session.call('127.0.0.1.room_operate.create_room.new',[],{operation_data:{"args":[],kwargs:{"room_type":"1"}}}).then(
+
+
+
+var login = function() {
+    connection.open();
+};
+function create_room() {
+    connection.session.call('127.0.0.1.room_operate.create_room.new',[],{operation_data:{"args":[],kwargs:{"room_type":"1"}}}).then(
       function (res) {
          console.log("Result:", res);
-      }
-   );
-    session.call('127.0.0.1.room_operate.0.test',[],{operation_data:{"args":[],kwargs:{}}}).then(
+      })
+};
+
+function enter_room() {
+    connection.session.call('127.0.0.1.room_operate.0.enter',[],{operation_data:{"args":[],kwargs:{}}}).then(
       function (res) {
          console.log("Result:", res);
       }
@@ -37,4 +45,20 @@ connection.onopen =function(session){
 
 }
 
-connection.open()
+function sit_down() {
+    connection.session.call('127.0.0.1.room_operate.0.sit_down',[],{operation_data:{"args":[],kwargs:{}}}).then({
+        function (res) {
+         console.log("Result:", res);
+      }
+    })
+}
+
+function ready() {
+    connection.session.call('127.0.0.1.room_operate.0.ready',[],{operation_data:{"args":[],kwargs:{}}}).then({
+        function (res) {
+         console.log("Result:", res);
+      }
+    })
+}
+
+

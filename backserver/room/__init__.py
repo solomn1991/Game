@@ -2,3 +2,4 @@
 # author:赵越超
 
 from .base import *
+from .FlexSeatRoom import *

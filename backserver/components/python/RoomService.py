@@ -13,7 +13,7 @@ import traceback
 
 
 from autobahn.asyncio.wamp import ApplicationSession, ApplicationRunner
-from room import BaseRoom
+from room import FlexSeatRoom
 from autobahn.wamp.types import RegisterOptions
 
 
@@ -21,6 +21,7 @@ class RoomManager(ApplicationSession):#comp
     def __init__(self,*args,**kwargs):
         super().__init__(*args, **kwargs)
         self.rooms = {}
+        self.server_ip = config.SERVER_IP
 
 
     async def onJoin(self, details):
@@ -43,7 +44,7 @@ class RoomManager(ApplicationSession):#comp
 
     def create_room(self,room_type):
         room_id = self.get_available_room_id()
-        room = BaseRoom()
+        room = FlexSeatRoom(room_service=self,room_id=room_id)
         self.rooms[room_id] = room
         msg = "创建房间成功"
         result = {"success":True,"room_id":room_id,"msg":msg}
@@ -56,7 +57,7 @@ class RoomManager(ApplicationSession):#comp
         username = session_info.get("authextra",{}).get("username")
         user_id = session_info.get("authextra",{}).get("user_id")
         user_role = session_info.get("authrole")
-        user_info = " ".join([user_role,username,"user_id:",str(user_id)])
+        user_info = {user_role:username,"user_id":str(user_id)}
 
         pattern_url = kwargs.get("details").procedure
         print("calling", pattern_url)
@@ -67,6 +68,8 @@ class RoomManager(ApplicationSession):#comp
         operation_data = kwargs.get("operation_data",{})
         op_args = operation_data.get("args", ())
         op_kwargs = operation_data.get("kwargs", {})
+
+        op_kwargs["user_info"] = user_info
 
 
         try:
@@ -84,7 +87,10 @@ class RoomManager(ApplicationSession):#comp
                     handler = getattr(room, operation_name)
                     assert handler, "该方法不存在"
 
-                    result = handler(*op_args, **op_kwargs)
+                    result = await handler(*op_args, **op_kwargs)
+
+
+
         except Exception as e:
             print(traceback.format_exc())
             result = {"success":False,"reason":"未知异常","trace_info":traceback.format_exc()}
