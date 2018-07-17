@@ -42,9 +42,9 @@ class RoomManager(ApplicationSession):#comp
         return room_id
 
 
-    def create_room(self,room_type):
+    def create_room(self,game_num):
         room_id = self.get_available_room_id()
-        room = FlexSeatRoom(room_service=self,room_id=room_id)
+        room = FlexSeatRoom(room_service=self,room_id=room_id,game_num=game_num)
         self.rooms[room_id] = room
         msg = "创建房间成功"
         result = {"success":True,"room_id":room_id,"msg":msg}
@@ -74,8 +74,8 @@ class RoomManager(ApplicationSession):#comp
 
         try:
             if inner_operation=="create_room.new":
-                room_type = op_kwargs.get("room_type")
-                result = self.create_room(room_type)
+                game_num = op_kwargs.get("game_num")
+                result = self.create_room(game_num=game_num)
             else:
                 room_id, operation_name = inner_operation.split(".")
                 room_id = int(room_id)
