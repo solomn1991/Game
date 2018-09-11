@@ -105,10 +105,10 @@ class FlexSeatRoom(BaseRoom):
 
         return result
 
-    def ready(self,user_info,position):
+    async def ready(self,user_info):
         user_id = user_info.get("user_id")
-        all_sitting_players = [self.all_player[tmp_user_id] for tmp_user_id in self.seat_player_map]
-        if all(self.all_sitting_players.is_ready) and len(all_sitting_players)>=self.game.min_num:
+        all_sitting_players = [self.all_player[self.seat_player_map[tmp_user_id]] for tmp_user_id in self.seat_player_map if self.seat_player_map[tmp_user_id]]
+        if all([sitting_player.is_ready for sitting_player in all_sitting_players]) and len(all_sitting_players)>=self.game.min_num:
             self.game.start()
 
         else:

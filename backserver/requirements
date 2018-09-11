@@ -1,2 +1,3 @@
 peewee==2.10.2 #版本太高异步的orm扩展会不支持
 peewee-async
+autobahn

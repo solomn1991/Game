@@ -1,0 +1,13 @@
+digraph ObjectGraph {
+  node[shape=box, style=filled, fillcolor=white];
+  o4380009416[fontcolor=red];
+  o4380009416[label="OBJ\n<__main__.OBJ object at 0x10511a3c8>"];
+  o4380009416[fillcolor="0,0,1"];
+  o140295424454952 -> o4380009416;
+  o4379986032 -> o4380009416 [label="attr",weight=2];
+  o140295424454952[label="frame\ngc_test1.py:11"];
+  o140295424454952[fillcolor="0,0,0.86"];
+  o4379986032[label="dict\n1 items"];
+  o4379986032[fillcolor="0,0,0.86"];
+  o4380009416 -> o4379986032 [label="__dict__",weight=10];
+}

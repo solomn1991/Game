@@ -30,7 +30,7 @@ var login = function() {
     connection.open();
 };
 function create_room() {
-    connection.session.call('127.0.0.1.room_operate.create_room.new',[],{operation_data:{"args":[],kwargs:{"room_type":"1"}}}).then(
+    connection.session.call('127.0.0.1.room_operate.create_room.new',[],{operation_data:{"args":[],kwargs:{"game_num":1}}}).then(
       function (res) {
          console.log("Result:", res);
       })
@@ -46,7 +46,7 @@ function enter_room() {
 }
 
 function sit_down() {
-    connection.session.call('127.0.0.1.room_operate.0.sit_down',[],{operation_data:{"args":[],kwargs:{}}}).then({
+    connection.session.call('127.0.0.1.room_operate.0.sit_down',[],{operation_data:{"args":[],kwargs:{position:1}}}).then({
         function (res) {
          console.log("Result:", res);
       }

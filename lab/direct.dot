@@ -1,0 +1,13 @@
+digraph ObjectGraph {
+  node[shape=box, style=filled, fillcolor=white];
+  o4549265392[fontcolor=red];
+  o4549265392[label="OBJ\n<__main__.OBJ object at 0x10f2847f0>"];
+  o4549265392[fillcolor="0,0,1"];
+  o140403971350392 -> o4549265392;
+  o4549274144 -> o4549265392 [label="attr",weight=2];
+  o140403971350392[label="frame\n/Users/solomn/PycharmProjects/Game/tmp/gc_test1/gc_test1.py:11"];
+  o140403971350392[fillcolor="0,0,0.86"];
+  o4549274144[label="dict\n1 items"];
+  o4549274144[fillcolor="0,0,0.86"];
+  o4549265392 -> o4549274144 [label="__dict__",weight=10];
+}

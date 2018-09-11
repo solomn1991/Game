@@ -1,0 +1,24 @@
+digraph ObjectGraph {
+  node[shape=box, style=filled, fillcolor=white];
+  o4456236592[fontcolor=red];
+  o4456236592[label="OBJ\n<__main__.OBJ object at 0x1099cc630>"];
+  o4456236592[fillcolor="0,0,1"];
+  o140403804802712 -> o4456236592;
+  o4460662000 -> o4456236592 [label="attr_a",weight=2];
+  o140403804802712[label="frame\n/Users/solomn/PycharmProjects/Game/tmp/gc_test1.py:18"];
+  o140403804802712[fillcolor="0,0,0.86"];
+  o4460662000[label="dict\n1 items"];
+  o4460662000[fillcolor="0,0,0.86"];
+  o4456236872 -> o4460662000 [label="__dict__",weight=10];
+  o4456236872[label="OBJ\n<__main__.OBJ object at 0x1099cc748>"];
+  o4456236872[fillcolor="0,0,0.72"];
+  o4480581776 -> o4456236872 [label="b",weight=2];
+  o140403804802712 -> o4456236872;
+  o4454861344 -> o4456236872 [label="attr_b",weight=2];
+  o4480581776[label="dict\n2 items"];
+  o4480581776[fillcolor="0,0,0.58"];
+  o140403804802712 -> o4480581776 [label="f_locals",weight=10];
+  o4454861344[label="dict\n1 items"];
+  o4454861344[fillcolor="0,0,0.58"];
+  o4456236592 -> o4454861344 [label="__dict__",weight=10];
+}

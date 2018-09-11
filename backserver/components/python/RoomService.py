@@ -5,6 +5,7 @@
 
 import sys
 import os
+import inspect
 
 work_dir = os.getcwd()
 sys.path.append(work_dir)
@@ -86,8 +87,11 @@ class RoomManager(ApplicationSession):#comp
 
                     handler = getattr(room, operation_name)
                     assert handler, "该方法不存在"
+                    result =  handler(*op_args, **op_kwargs)
 
-                    result = await handler(*op_args, **op_kwargs)
+
+                    if inspect.iscoroutine(result):
+                        result = await result
 
 
 
